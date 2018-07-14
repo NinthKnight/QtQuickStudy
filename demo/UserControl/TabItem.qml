@@ -18,12 +18,21 @@ TabItemForm {
     }
 
     mouseArea.onEntered: {
-        source = buttonHoverImage;
+
+        if(!active){
+            source = buttonHoverImage;
+        }
+        else{
+            source = buttonPressImage;
+        }
     }
 
     mouseArea.onExited: {
         if(!active){
         source = buttonNormalImage;
+        }
+        else{
+            source = buttonPressImage;
         }
     }
 
