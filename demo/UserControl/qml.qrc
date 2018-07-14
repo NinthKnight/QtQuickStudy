@@ -90,5 +90,7 @@
         <file>resources/homeWindow/btn_volumeset_roll.png</file>
         <file>resources/homeWindow/bk_you.png</file>
         <file>MusicPlayWindow.qml</file>
+        <file>TabItem.qml</file>
+        <file>TabItemForm.ui.qml</file>
     </qresource>
 </RCC>

@@ -1,8 +1,9 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
-import QtQuick.Controls 1.4
+import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
-import QtQuick.Dialogs 1.1
+import QtQuick.Layouts 1.3
+import QtGraphicalEffects 1.0
 
 Window {
         id:mainWindow;
@@ -201,253 +202,254 @@ Window {
         //主界面区 web ui
         //左边按钮
         Rectangle{
-            id:mainMenuRectangle;
+            id: mainMenuRectangle
             anchors.top: titleBarRectangle.bottom;
             anchors.left: mainWindow.left;
 
-            width: 177;
-            height: 624;
+            width: 177
+            height: 624
 
-            property int nCurrentSelected: buttonHome.nHome
-            function setPressImage(){
+            Rectangle{
+                id:leftside
+                property int currentIndex: 0
+                property var items: []
 
-                //buttonHome.item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_home_normal.png";
-                //buttonMusicPlay.item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_musicplay_normal.png";
-
-                emit: buttonHome.item.updated();
-                emit: buttonMusicPlay.item.updated();
-
-                if (nCurrentSelected == buttonHome.nHome){
-                    emit: buttonHome.item.pressed();
-                }
-                else if (nCurrentSelected == buttonMusicPlay.nMusicPlay){
-                    //buttonMusicPlay.item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_musicplay_press.png";
-                    emit: buttonMusicPlay.item.pressed();
+                function changeActive(){
+                    for(var i = 0;i<leftside.items.length;i++){
+                        leftside.items[i].active = false
+                    }
+                    leftside.items[leftside.currentIndex].active = true
                 }
 
+                Image{
+                    id:labelLeftMenuImg;
+                    anchors.left: parent.left;
+                    anchors.top: parent.top;
+                    width: 177
+                    height: 624
 
-
-            }
-
-
-            Image{
-                id:labelLeftMenuImg;
-                anchors.left: parent.left;
-                anchors.top: parent.top;
-                source: "/resources/background/bk03.png";
-            }
-
-            //主页
-            Loader {
-                id: buttonHome;
-                anchors.left: parent.left;
-                anchors.top: parent.top;
-                source: "XButton.qml";
-                property int nHome: 1
-
-                onLoaded: {
-                    item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_home_normal.png";
-                    item.buttonPressImage = "/resources/leftMenuImage/btn_menu_home_press.png";
-                    item.buttonHoverImage = "/resources/leftMenuImage/btn_menu_home_roll.png";
-                    item.buttonDisableImage = "/resources/leftMenuImage/btn_menu_home_normal.png";
-                    item.width = 177;
-                    item.height = 50;
+                    source: "/resources/background/bk03.png";
                 }
 
 
-                Connections {
-                    target: buttonHome.item;
+                //主页
+                TabItem{
+                    id: item0;
+                    anchors.left: parent.left;
+                    anchors.top: parent.top;
+
+                    active: leftside.currentIndex == 0;
+
+                    buttonNormalImage : "/resources/leftMenuImage/btn_menu_home_normal.png";
+                    buttonPressImage : "/resources/leftMenuImage/btn_menu_home_press.png";
+                    buttonHoverImage : "/resources/leftMenuImage/btn_menu_home_roll.png";
+                    buttonDisableImage : "/resources/leftMenuImage/btn_menu_home_normal.png";
+
                     onClicked: {
-                        mainUIRectangleLoader.source = "HomeWindow.qml";
-                        mainMenuRectangle.nCurrentSelected = buttonHome.nHome;
-                        mainMenuRectangle.setPressImage();
-                    }
-
-                    onPressed:{
-                        buttonHome.item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_home_press.png";
-                        console.log("buttonHome onPressed");
-                    }
-
-                    onUpdated:{
-                        buttonHome.item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_home_normal.png";
-                        emit: buttonHome.item.buttonMouseArea.pressed();
-                        console.log("buttonHome OnUpdated");
+                        stackView.clear()
+                        stackView.push("HomeWindow.qml")
+                        leftside.currentIndex = 0
+                        leftside.changeActive()
                     }
                 }
 
-            }
+                //音乐点播
+                TabItem{
+                    id: item1;
+                    anchors.left: item0.left;
+                    anchors.top: item0.bottom;
 
-            //音乐点播
-            Loader {
-                id: buttonMusicPlay;
-                anchors.left: buttonHome.left;
-                anchors.top: buttonHome.bottom;
-                source: "XButton.qml";
-                property int nMusicPlay: 2
+                    buttonNormalImage : "/resources/leftMenuImage/btn_menu_musicplay_normal.png";
+                    buttonPressImage : "/resources/leftMenuImage/btn_menu_musicplay_press.png";
+                    buttonHoverImage : "/resources/leftMenuImage/btn_menu_musicplay_roll.png";
+                    buttonDisableImage : "/resources/leftMenuImage/btn_menu_musicplay_normal.png";
 
-                onLoaded: {
-                    item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_musicplay_normal.png";
-                    item.buttonPressImage = "/resources/leftMenuImage/btn_menu_musicplay_press.png";
-                    item.buttonHoverImage = "/resources/leftMenuImage/btn_menu_musicplay_roll.png";
-                    item.buttonDisableImage = "/resources/leftMenuImage/btn_menu_musicplay_normal.png";
-                    item.width = 177;
-                    item.height = 50;
-                }
-                Connections {
-                    target: buttonMusicPlay.item;
+
+                    active: leftside.currentIndex == 1
                     onClicked: {
-                        mainUIRectangleLoader.source = "MusicPlayWindow.qml";
-                        mainMenuRectangle.nCurrentSelected = buttonMusicPlay.nMusicPlay;
-                        mainMenuRectangle.setPressImage();
-                    }
-                    onPressed:{
-                        buttonMusicPlay.item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_musicplay_press.png";
-                        console.log("buttonMusicPlay onPressed");
-                    }
-
-                    onUpdated:{
-                        buttonMusicPlay.item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_musicplay_normal.png";
-                        console.log("buttonMusicPlay OnUpdated");
+                        stackView.clear()
+                        stackView.push("MusicPlayWindow.qml")
+                        leftside.currentIndex = 1
+                        leftside.changeActive()
                     }
                 }
-            }
 
-            //奖品派发
-            Loader {
-                id: buttonPrizeSend;
-                anchors.left: buttonMusicPlay.left;
-                anchors.top: buttonMusicPlay.bottom;
-                source: "XButton.qml";
+                //奖品派发
+                TabItem{
+                    id:item2
+                    anchors.left: item1.left;
+                    anchors.top: item1.bottom;
 
-                onLoaded: {
-                    item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_prizesend_normal.png";
-                    item.buttonPressImage = "/resources/leftMenuImage/btn_menu_prizesend_press.png";
-                    item.buttonHoverImage = "/resources/leftMenuImage/btn_menu_prizesend_roll.png";
-                    item.buttonDisableImage = "/resources/leftMenuImage/btn_menu_prizesend_normal.png";
-                    item.width = 177;
-                    item.height = 50;
+                    buttonNormalImage : "/resources/leftMenuImage/btn_menu_prizesend_normal.png";
+                    buttonPressImage : "/resources/leftMenuImage/btn_menu_prizesend_press.png";
+                    buttonHoverImage : "/resources/leftMenuImage/btn_menu_prizesend_roll.png";
+                    buttonDisableImage : "/resources/leftMenuImage/btn_menu_prizesend_normal.png";
+
+                    active: leftside.currentIndex == 2
+                    onClicked: {
+                        stackView.clear()
+                        stackView.push("MusicPlayWindow.qml")
+                        leftside.currentIndex = 2
+                        leftside.changeActive()
+                    }
                 }
-            }
 
-            //留言版
-            Loader {
-                id: buttonLeaveMsg;
-                anchors.left: buttonPrizeSend.left;
-                anchors.top: buttonPrizeSend.bottom;
-                source: "XButton.qml";
+                //留言版
+                TabItem{
+                    id:item3
+                    anchors.left: item2.left;
+                    anchors.top: item2.bottom;
 
-                onLoaded: {
-                    item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_leavemsg_normal.png";
-                    item.buttonPressImage = "/resources/leftMenuImage/btn_menu_leavemsg_press.png";
-                    item.buttonHoverImage = "/resources/leftMenuImage/btn_menu_leavemsg_roll.png";
-                    item.buttonDisableImage = "/resources/leftMenuImage/btn_menu_leavemsg_normal.png";
-                    item.width = 177;
-                    item.height = 50;
+                    buttonNormalImage : "/resources/leftMenuImage/btn_menu_leavemsg_normal.png";
+                    buttonPressImage : "/resources/leftMenuImage/btn_menu_leavemsg_press.png";
+                    buttonHoverImage : "/resources/leftMenuImage/btn_menu_leavemsg_roll.png";
+                    buttonDisableImage : "/resources/leftMenuImage/btn_menu_leavemsg_normal.png";
+
+                    active: leftside.currentIndex == 3
+                    onClicked: {
+                        stackView.clear()
+                        stackView.push("MusicPlayWindow.qml")
+                        leftside.currentIndex = 3
+                        leftside.changeActive()
+                    }
                 }
-            }
 
-            //幸运点赠送
-            Loader {
-                id: buttonLuckyPoint;
-                anchors.left: buttonLeaveMsg.left;
-                anchors.top: buttonLeaveMsg.bottom;
-                source: "XButton.qml";
+                //幸运点赠送
+                TabItem{
+                    id:item4
+                    anchors.left: item3.left;
+                    anchors.top: item3.bottom;
 
-                onLoaded: {
-                    item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_luckypoint_normal.png";
-                    item.buttonPressImage = "/resources/leftMenuImage/btn_menu_luckypoint_press.png";
-                    item.buttonHoverImage = "/resources/leftMenuImage/btn_menu_luckypoint_roll.png";
-                    item.buttonDisableImage = "/resources/leftMenuImage/btn_menu_luckypoint_normal.png";
-                    item.width = 177;
-                    item.height = 50;
+                    buttonNormalImage : "/resources/leftMenuImage/btn_menu_luckypoint_normal.png";
+                    buttonPressImage : "/resources/leftMenuImage/btn_menu_luckypoint_press.png";
+                    buttonHoverImage : "/resources/leftMenuImage/btn_menu_luckypoint_roll.png";
+                    buttonDisableImage : "/resources/leftMenuImage/btn_menu_luckypoint_normal.png";
+
+                    active: leftside.currentIndex == 4
+                    onClicked: {
+                        stackView.clear()
+                        stackView.push("MusicPlayWindow.qml")
+                        leftside.currentIndex = 4
+                        leftside.changeActive()
+                    }
                 }
-            }
 
-            //顾客管理
-            Loader {
-                id: buttonClientChat;
-                anchors.left: buttonLuckyPoint.left;
-                anchors.top: buttonLuckyPoint.bottom;
-                source: "XButton.qml";
+                //顾客管理
+                TabItem{
+                    id:item5
+                    anchors.left: item4.left;
+                    anchors.top: item4.bottom;
 
-                onLoaded: {
-                    item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_clientchat_normal.png";
-                    item.buttonPressImage = "/resources/leftMenuImage/btn_menu_clientchat_press.png";
-                    item.buttonHoverImage = "/resources/leftMenuImage/btn_menu_clientchat_roll.png";
-                    item.buttonDisableImage = "/resources/leftMenuImage/btn_menu_clientchat_normal.png";
-                    item.width = 177;
-                    item.height = 50;
+                    buttonNormalImage : "/resources/leftMenuImage/btn_menu_clientchat_normal.png";
+                    buttonPressImage : "/resources/leftMenuImage/btn_menu_clientchat_press.png";
+                    buttonHoverImage : "/resources/leftMenuImage/btn_menu_clientchat_roll.png";
+                    buttonDisableImage : "/resources/leftMenuImage/btn_menu_clientchat_normal.png";
+
+                    active: leftside.currentIndex == 5
+                    onClicked: {
+                        stackView.clear()
+                        stackView.push("MusicPlayWindow.qml")
+                        leftside.currentIndex = 5
+                        leftside.changeActive()
+                    }
                 }
-            }
 
+                //商品管理
+                TabItem{
+                    id:item6
+                    anchors.left: item5.left;
+                    anchors.top: item5.bottom;
 
-            //商品管理
-            Loader {
-                id: buttonGoodsManage;
-                anchors.left: buttonClientChat.left;
-                anchors.top: buttonClientChat.bottom;
-                source: "XButton.qml";
+                    buttonNormalImage : "/resources/leftMenuImage/btn_menu_goodsmanage_normal.png";
+                    buttonPressImage : "/resources/leftMenuImage/btn_menu_goodsmanage_press.png";
+                    buttonHoverImage : "/resources/leftMenuImage/btn_menu_goodsmanage_roll.png";
+                    buttonDisableImage : "/resources/leftMenuImage/btn_menu_goodsmanage_normal.png";
 
-                onLoaded: {
-                    item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_goodsmanage_normal.png";
-                    item.buttonPressImage = "/resources/leftMenuImage/btn_menu_goodsmanage_press.png";
-                    item.buttonHoverImage = "/resources/leftMenuImage/btn_menu_goodsmanage_roll.png";
-                    item.buttonDisableImage = "/resources/leftMenuImage/btn_menu_goodsmanage_normal.png";
-                    item.width = 177;
-                    item.height = 50;
+                    active: leftside.currentIndex == 6
+                    onClicked: {
+                        stackView.clear()
+                        stackView.push("MusicPlayWindow.qml")
+                        leftside.currentIndex = 6
+                        leftside.changeActive()
+                    }
                 }
-            }
 
-            //活动管理
-            Loader {
-                id: buttonActivityManage;
-                anchors.left: buttonGoodsManage.left;
-                anchors.top: buttonGoodsManage.bottom;
-                source: "XButton.qml";
+                //活动管理
+                TabItem{
+                    id:item7
+                    anchors.left: item6.left;
+                    anchors.top: item6.bottom;
 
-                onLoaded: {
-                    item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_activitymanage_normal.png";
-                    item.buttonPressImage = "/resources/leftMenuImage/btn_menu_activitymanage_press.png";
-                    item.buttonHoverImage = "/resources/leftMenuImage/btn_menu_activitymanage_roll.png";
-                    item.buttonDisableImage = "/resources/leftMenuImage/btn_menu_activitymanage_normal.png";
-                    item.width = 177;
-                    item.height = 50;
+                    buttonNormalImage : "/resources/leftMenuImage/btn_menu_activitymanage_normal.png";
+                    buttonPressImage : "/resources/leftMenuImage/btn_menu_activitymanage_press.png";
+                    buttonHoverImage : "/resources/leftMenuImage/btn_menu_activitymanage_roll.png";
+                    buttonDisableImage : "/resources/leftMenuImage/btn_menu_activitymanage_normal.png";
+
+                    active: leftside.currentIndex == 7
+                    onClicked: {
+                        stackView.clear()
+                        stackView.push("MusicPlayWindow.qml")
+                        leftside.currentIndex = 7
+                        leftside.changeActive()
+                    }
                 }
-            }
 
-            //租号管理
-            Loader {
-                id: buttonRentno;
-                anchors.left: buttonActivityManage.left;
-                anchors.top: buttonActivityManage.bottom;
-                source: "XButton.qml";
+                //租号管理
+                TabItem{
+                    id:item8
+                    anchors.left: item7.left;
+                    anchors.top: item7.bottom;
 
-                onLoaded: {
-                    item.buttonNormalImage = "/resources/leftMenuImage/btn_menu_rentno_normal.png";
-                    item.buttonPressImage = "/resources/leftMenuImage/btn_menu_rentno_press.png";
-                    item.buttonHoverImage = "/resources/leftMenuImage/btn_menu_rentno_roll.png";
-                    item.buttonDisableImage = "/resources/leftMenuImage/btn_menu_rentno_normal.png";
-                    item.width = 177;
-                    item.height = 50;
+                    buttonNormalImage : "/resources/leftMenuImage/btn_menu_rentno_normal.png";
+                    buttonPressImage : "/resources/leftMenuImage/btn_menu_rentno_press.png";
+                    buttonHoverImage : "/resources/leftMenuImage/btn_menu_rentno_roll.png";
+                    buttonDisableImage : "/resources/leftMenuImage/btn_menu_rentno_normal.png";
+
+                    active: leftside.currentIndex == 8;
+                    onClicked: {
+                        stackView.clear()
+                        stackView.push("MusicPlayWindow.qml")
+                        leftside.currentIndex = 8
+                        leftside.changeActive()
+                    }
                 }
+
+            }
+            //右边显示
+            StackView {
+                id: stackView
+                anchors.top: titleBarRectangle.bottom;
+                anchors.left: mainMenuRectangle.right;
+                width:843;
+                height: 624;
+                visible: true;
+
+                initialItem: "HomeWindow.qml"
+
+                popEnter: null
+                popExit: null
+                pushEnter: null
+                pushExit: null
             }
 
+
+            Component.onCompleted: {
+                leftside.items.push(item0)
+                leftside.items.push(item1)
+                leftside.items.push(item2)
+                leftside.items.push(item3)
+                leftside.items.push(item4)
+                leftside.items.push(item5)
+                leftside.items.push(item6)
+                leftside.items.push(item7)
+                leftside.items.push(item8)
+        //        QmlController.stackView = stackView
+        //        QmlController.header = myHeader
+        //        console.log("stackView",QmlController.header,myHeader)
+            }
 
         }
 
-        //右边显示
-        Loader{
-            id:mainUIRectangleLoader;
-            anchors.top: titleBarRectangle.bottom;
-            anchors.left: mainMenuRectangle.right;
-
-            width:843;
-            height: 624;
-            visible: true;
-
-            source: "HomeWindow.qml"
-
-        }
 
         //底部显示
         Rectangle{
