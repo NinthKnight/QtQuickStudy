@@ -2,7 +2,7 @@
 ## 工具
 **1.** VS 2015  
 **2.** Qt 5.9.6   
-**3.** Qt下载网址[http://download.qt.io/archive/qt/](http://download.qt.io/archive/qt/ "Qt源码及工具下载地址")
+**3.** Qt下载网址[http://download.qt.io/archive/qt/](http://download.qt.io/archive/qt/ "Qt源码及工具下载地址")  
 **4.** windwos SDK
 
 ## 说明
