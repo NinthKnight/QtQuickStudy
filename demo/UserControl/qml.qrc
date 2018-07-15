@@ -92,5 +92,6 @@
         <file>MusicPlayWindow.qml</file>
         <file>TabItem.qml</file>
         <file>TabItemForm.ui.qml</file>
+        <file>WebWindow.qml</file>
     </qresource>
 </RCC>

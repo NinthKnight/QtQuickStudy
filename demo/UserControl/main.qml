@@ -288,7 +288,7 @@ Window {
                     active: leftside.currentIndex == 2
                     onClicked: {
                         stackView.clear()
-                        stackView.push("MusicPlayWindow.qml")
+                        stackView.push("WebWindow.qml")
                         leftside.currentIndex = 2
                         leftside.changeActive()
                     }
