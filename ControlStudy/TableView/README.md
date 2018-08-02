@@ -7,146 +7,20 @@ TableView类型
 （效果相当于MFC的TableView或TableControl）<br />
 通过delegate可以定制表格的外观
 </p>
-目录
----
-<a href="#property"><font size=5>属性</font></a><br />
-<div style="margin-left:30px">
-    <a href="#alternatingRowColors">
-        <font size=4>alternatingRowColors</font>
-    </a>
-    <br />
-    <a href="#backgroundVisible">
-        <font size=4>backgroundVisible</font>
-    </a>
-    <br />
-    <a href="#columnCount">
-        <font size=4>columnCount</font>
-    </a>
-    <br />
-    <a href="#contentFooter">
-        <font size=4>contentFooter</font>
-    </a>
-    <br />
-    <a href="#contentHeader">
-        <font size=4>contentHeader</font>
-    </a>
-    <br />
-    <a href="#currentRow">
-        <font size=4>currentRow</font>
-    </a>
-    <br />
-    <a href="#headerDelegate">
-        <font size=4>headerDelegate</font>
-    </a>
-    <br />
-    <a href="#headerVisible">
-        <font size=4>headerVisible</font>
-    </a>
-    <br />
-    <a href="#itemDelegate">
-        <font size=4>itemDelegate</font>
-    </a>
-    <br />
-    <a href="#model">
-        <font size=4>model</font>
-    </a>
-    <br />
-    <a href="#rowCount">
-        <font size=4>rowCount</font>
-    </a>
-    <br />
-    <a href="#rowDelegate">
-        <font size=4>rowDelegate</font>
-    </a>
-    <br />
-    <a href="#selection">
-        <font size=4>selection</font>
-    </a>
-    <br />
-    <a href="#selectionMode">
-        <font size=4>selectionMode</font>
-    </a>
-    <br />
-    <a href="#sortIndicatorColumn">
-        <font size=4>sortIndicatorColumn</font>
-    </a>
-    <br />
-    <a href="#sortIndicatorOrder">
-        <font size=4>sortIndicatorOrder</font>
-    </a>
-    <br />
-    <a href="#sortIndicatorVisible">
-        <font size=4>sortIndicatorVisible</font>
-    </a>
-    <br />
-</div>
-<a href="#signal"><font size=5>信号</font></a><br />
-<div style="margin-left:30px">
-    <a href="#activated">
-        <font size=4>activated</font>
-    </a>
-    <br />
-    <a href="#clicked">
-        <font size=4>clicked</font>
-    </a>
-    <br />
-    <a href="#doubleClicked">
-        <font size=4>doubleClicked</font>
-    </a>
-    <br />
-    <a href="#pressAndHold">
-        <font size=4>pressAndHold</font>
-    </a>
-    <br />
-</div>
-</div>
-<a href="#mothed"><font size=5>方法</font></a><br />
-<div style="margin-left:30px">
-    <a href="#addColumn">
-        <font size=4>addColumn</font>
-    </a>
-    <br />
-    <a href="#getColumn">
-        <font size=4>getColumn</font>
-    </a>
-    <br />
-    <a href="#insertColumn">
-        <font size=4>insertColumn</font>
-    </a>
-    <br />
-    <a href="#moveColumn">
-        <font size=4>moveColumn</font>
-    </a>
-    <br />
-    <a href="#positionViewAtRow">
-        <font size=4>positionViewAtRow</font>
-    </a>
-    <br />
-    <a href="#removeColumn">
-        <font size=4>removeColumn</font>
-    </a>
-    <br />
-    <a href="#resizeColumnsToContents">
-        <font size=4>resizeColumnsToContents</font>
-    </a>
-    <br />
-    <a href="#rowAt">
-        <font size=4>rowAt</font>
-    </a>
-    <br />
-</div>
+
+
+
 
 属性
 ----
 <div id="property">
-    <p id="alternatingRowColors">
-        <strong id="#alternatingRowColors">alternatingRowColors : bool</strong><br />
-        &ensp;&ensp;&ensp;&ensp;描述：是否交替显示行颜色<br />
-        &ensp;&ensp;&ensp;&ensp;默认值：ture<br />
-    </p>
-    
-    <p id="backgroundVisible">
-        <strong>backgroundVisible : bool</strong><br />
+<p id="alternatingRowColors">
+<strong id="#alternatingRowColors">alternatingRowColors : bool</strong><br />
+&ensp;&ensp;&ensp;&ensp;描述：是否交替显示行颜色<br />
+&ensp;&ensp;&ensp;&ensp;默认值：ture<br />
+
+<p id="backgroundVisible">
+<strong>backgroundVisible : bool</strong><br />
         &ensp;&ensp;&ensp;&ensp;描述：背景颜色是否要填充<br />
         &ensp;&ensp;&ensp;&ensp;默认值：ture<br />
         &ensp;&ensp;&ensp;&ensp;注意：rowDelegate不会被该属性影响<br />
@@ -257,10 +131,10 @@ TableView类型
         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Qt.AscendingOrder：升序，默认<br />
         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Qt.DescendingOrder：降序<br />
     </p>
-    <p id="sortIndicatorVisible">
-        <strong>sortIndicatorVisible : bool</strong><br />
-        &ensp;&ensp;&ensp;&ensp;描述：是否要隐藏排序指示器，默认为false<br />
-    </p>
+<p id="sortIndicatorVisible">
+<strong>sortIndicatorVisible : bool</strong><br />
+&ensp;&ensp;&ensp;&ensp;描述：是否要隐藏排序指示器，默认为false<br />
+</p>
 </div>
 
 信号
