@@ -6,4 +6,4 @@
 > https://github.com/NinthKnight/QtQuickStudy/blob/master/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/Qt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8C%E8%B5%84%E6%96%99%E7%9B%B8%E5%85%B3.markdown
 
 ### C++与qml交互
-> 
+> https://github.com/NinthKnight/QtQuickStudy/blob/master/syntax/c%2B%2B%26qml.md
