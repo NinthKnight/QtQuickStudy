@@ -10,6 +10,6 @@
 
 ### c11新语法
 
- + lambda表达式：
- + 4种cast：
- + 总结：
+ + lambda表达式：https://github.com/NinthKnight/QtQuickStudy/blob/master/c11/lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/Lambda%20Expression.md
+ + 4种cast：https://github.com/NinthKnight/QtQuickStudy/tree/master/c11/4%E7%A7%8Dcast%E8%AE%B2%E8%A7%A3
+ + 总结：https://github.com/NinthKnight/QtQuickStudy/blob/master/c11/%E6%80%BB%E7%BB%93/c11.md
