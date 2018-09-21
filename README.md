@@ -7,3 +7,9 @@
 
 ### C++与qml交互
 > https://github.com/NinthKnight/QtQuickStudy/blob/master/syntax/c%2B%2B%26qml.md
+
+### c11新语法
+
+ + lambda表达式：
+ + 4种cast：
+ + 总结：
