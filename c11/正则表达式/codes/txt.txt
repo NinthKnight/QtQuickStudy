@@ -1,0 +1,15 @@
+hello, what are you doing? i'm creazy,hao do you do
+
+regex rgx(R"(\b\w+\d\b)");
+
+  smatch sm;
+  regex_search(str, sm, rgx);
+
+  for (auto i : sm)
+  {
+    cout << i;
+  }
+
+
+
+cout << regex_replace(str, rgx, "***") << endl;

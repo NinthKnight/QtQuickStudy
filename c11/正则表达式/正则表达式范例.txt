@@ -1,0 +1,44 @@
+2.2元字符
+ regex:   \ba\w\b
+ 1. \b匹配一个单词开始的位置
+ 2. 接着匹配一个a字符
+ 3. \w 匹配一个字母、数字及下划线和汉字
+ 4. \b 接着匹配一个字母结束的位置
+
+匹配结果：ab ac ad ax
+
+提问：如果像匹配abc abcd abcde 该如何匹配?
+
+2.4重复限定符
+ regex: \ba\w*\b
+ 匹配结果：a abc abcd abcde axxxxx
+
+ regex: \ba\w{3}\b
+ 能匹配：abcd aaaa axxx
+ 不能匹配: axx axxxx
+
+ regex: \ba\w{1,3}\b
+ 能匹配：ab abc abcd
+ 不能匹配：a axxxx
+
+ 提问：QQ号匹配方案?
+
+2.5字符类
+ regex: \b[a-z]+\b
+ 匹配任意小写单词
+ 如：boy hello str
+
+2.8后向引用
+ \0表示整个表达式捕获结果,\1表示第一个分组,以此类推
+ regex: \b(cr32)\s+\1\b
+ 找重复的连续的cr32
+ 如：go to cr32 cr32 zhen de hen niu bi
+ 匹配结果 cr32 cr32
+
+2.9零宽断言
+ 出题，找出32数字前面的名称,不包括32
+
+ str: cc32 win98 cr32 win64 zjh32
+
+ regex: \w+(?=32\b)
+ 匹配结果: cc cr zjh
